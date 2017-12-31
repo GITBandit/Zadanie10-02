@@ -6,36 +6,36 @@ import java.util.List;
 
 public class WeatherWriter {
 
-    WeatherReader weatherReader = new WeatherReader();
-    WeatherInfo weatherInfo;
+    private WeatherReader weatherReader = new WeatherReader();
+    private WeatherInfo weatherInfo;
 
-    List<String> cities = weatherReader.getCities();
-    List<WeatherInfo> weatherInfoList = new ArrayList<>();
+    private List<String> cities = weatherReader.getCities();
+    private List<WeatherInfo> weatherInfoList = new ArrayList<>();
 
-    public void printCities(){
-        System.out.println(cities.get(0));
-    }
 
     public void saveWeather() {
 
         try (FileWriter fileWriter = new FileWriter("citiesWeather.txt");
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             for (String x : cities) {
-                //x ==
+                // fixing inproper url for Poznań
+                if (x.equals("Poznań")) {
+                    x = "poznań-103088171";
+                }
                 try {
                     WeatherApi api = new WeatherApi();
                     int temperature = api.getTemperature(x);
                     String description = api.getDescription(x);
-                    // saving in a file tests - to be removed
-                    bufferedWriter.write("Pogoda w mieście " + x + " : " + description );
-                    bufferedWriter.newLine();
-                    bufferedWriter.write("Aktualna temperatura to : " + temperature);
-                    bufferedWriter.newLine();
-                    bufferedWriter.write("-----------------------------------------------------------------");
+                    // saving in a file - CSV form
+                    if(x.equals("poznań-103088171")){
+                        x = "Poznań";
+                    }
+                    bufferedWriter.write( x + ";" + temperature + ";" + description );
                     bufferedWriter.newLine();
                     // console display
                     System.out.printf("Pogoda w mieście %s: %s\n", x, description);
                     System.out.printf("Aktualna temperatura: %d stopni\n", temperature);
+                    System.out.println("-------------------------------------------------------------------------");
                     // adding data to the list
                     weatherInfo = new WeatherInfo(x,description,temperature);
                     weatherInfoList.add(weatherInfo);
@@ -48,7 +48,6 @@ public class WeatherWriter {
                     // console display
                     System.err.println("Nie udało się pobrać informacji dla miasta " + x);
                     // adding object when failed
-                    //WeatherApi api = new WeatherApi();
                     weatherInfo = new WeatherInfo(x,"Nie udało się pobrać informacji dla tego miasta.",0);
                     weatherInfoList.add(weatherInfo);
                 }
@@ -61,7 +60,7 @@ public class WeatherWriter {
     }
 
     public void printWeatherInfoList(){
-        System.out.println(weatherInfoList.size());
+        // checking if the list is correct
         for (WeatherInfo s : weatherInfoList) {
             System.out.println(s.toString());
         }

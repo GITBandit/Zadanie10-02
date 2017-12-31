@@ -31,10 +31,6 @@ public class WeatherReader {
         return cityList;
     }
 
-/*    public void printTest() {
-        System.out.println(cityList.size());
-        System.out.println(cityList.get(1));
-    }*/
 
 
 }

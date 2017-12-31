@@ -1,0 +1,14 @@
+Pogoda w mieście Wrocław : Zachmurzenie zmienne
+Aktualna temperatura to : 10
+-----------------------------------------------------------------
+Niestety nie udało się pobrać informacji dla miasta Poznań
+-----------------------------------------------------------------
+Pogoda w mieście Warszawa : Niewielkie zachmurzenie
+Aktualna temperatura to : 1
+-----------------------------------------------------------------
+Pogoda w mieście Kraków : Zachmurzenie całkowite, drobny deszcz
+Aktualna temperatura to : 7
+-----------------------------------------------------------------
+Pogoda w mieście Gdańsk : Zachmurzenie zmienne, drobny mokry śnieg
+Aktualna temperatura to : 2
+-----------------------------------------------------------------
